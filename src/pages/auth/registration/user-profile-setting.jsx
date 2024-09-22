@@ -1,11 +1,9 @@
-import "../../../styles/auth/profile-set-up.css";
+import "../../../styles/auth/ProfileSetUp.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import { useDropzone } from "react-dropzone";
-// import uploadIcon from "../../../assets/icons/upload.svg";
 import axios from "axios";
 import { BASE_URL } from "../../utils";
 
@@ -19,37 +17,7 @@ const UserProfileSetup = () => {
     }
   }, [navigate, previousUserValues]);
 
-  // const [profileImageFile, setProfileImageFile] = useState(null); // Store file object
-  // const [fileError, setFileError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  // // Use React Dropzone for image uploading
-  // const { getRootProps, getInputProps } = useDropzone({
-  //   accept: {
-  //     "image/jpeg": [],
-  //     "image/png": [],
-  //     "image/gif": [],
-  //     "image/svg+xml": [],
-  //   },
-  //   maxSize: 800000, // 800KB limit
-  //   onDrop: (acceptedFiles) => {
-  //     if (acceptedFiles.length) {
-  //       const file = acceptedFiles[0];
-
-  //       if (file.size > 800000) {
-  //         // Validate image size
-  //         setFileError(
-  //           "Image size exceeds 800KB. Please upload a smaller image."
-  //         );
-  //         return;
-  //       }
-  //       setProfileImageFile(file); // Store the file object
-  //       setFileError("");
-  //     } else {
-  //       setFileError("Please upload a valid image.");
-  //     }
-  //   },
-  // });
 
   const formik = useFormik({
     initialValues: {
@@ -70,16 +38,8 @@ const UserProfileSetup = () => {
       formData.append("email", previousUserValues.email);
       formData.append("role", previousUserValues.role);
 
-      // Append user details
       formData.append("user_details[contact_number]", values.contact_number);
       formData.append("user_details[address]", values.address);
-
-      // Append profile image file if available
-      // if (profileImageFile) {
-      //   formData.append("user_details[profile_picture]", profileImageFile);
-      // }
-
-      // Append designer details if applicable
       formData.append("designer_details[address]", values.address);
       formData.append("designer_details[bio]", values.bio);
       formData.append(
